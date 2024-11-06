@@ -2,7 +2,7 @@ import streamlit as st
 import pickle
 import numpy as np
 import pandas as pd
-
+ 
 #load the trained model
 with open("insurance_premium_model_rfr.pkl", "rb") as f:
     model = pickle.load(f)
@@ -18,31 +18,43 @@ def calculate_bmi(height, weight):
     height_in_meters = height /100 # Convert height from cm to meters
     return round(weight / (height_in_meters**2),2)
 
-st.title("health Insurance Premium prediction app")
+st.title("Health Insurance Premium prediction app")
 
 # Age Categories
 age_bins = [8, 30, 40,50,60,70]
 age_labels = ['18-30', '30-40', '40-50', '50-60', '60+']
 age_mapping = {'18-30': 0, '30-40': 1, '40-50': 2, '50-60': 3, '60+': 4}
 
+with st.sidebar:
+    st.header("User Information")
+    ## usre inputs
+    age = st.slider("age", 17,70,35, help="Enter your age in years")
+    st.caption("Age should be between 17 and 70.")
+    age_cat = pd.cut([age], bins=age_bins, labels=age_labels, right=False)[0]
+    age_category = age_mapping[age_cat]
+    height = st.slider("height", 150,200,170)
+    st.caption("height should be between 150 and 200.")
+    weight = st.slider("weight", 50,140,70)
+    st.caption("weight should be between 50 and 140.")
 
-## usre inputs
-age = st.slider("age", 17,70,35)
-age_cat = pd.cut([age], bins=age_bins, labels=age_labels, right=False)[0]
-age_category = age_mapping[age_cat]
+with st.expander("Medical History"):
+    diabetes = st.selectbox("Diabetes", [0,1])
+    blood_pressure_problems = st.selectbox("BloodPressureProblems", [0,1])
+    any_transplants = st.selectbox("AnyTransplants",[0,1])
+    any_chronic_diseases = st.selectbox("AnyChronicDiseases", [0,1])
 
-diabetes = st.selectbox("Diabetes", [0,1])
-blood_pressure_problems = st.selectbox("BloodPressureProblems", [0,1])
-any_transplants = st.selectbox("AnyTransplants",[0,1])
-any_chronic_diseases = st.selectbox("AnyChronicDiseases", [0,1])
-height = st.slider("height", 150,200,170)
-weight = st.slider("weight", 50,120,70)
-known_allergies  = st.selectbox("KnownAllergies", [0,1])
-history_of_cancer = st.selectbox("HistoryOfCancerInFamily", [0,1])
-number_of_surgeries  = st.selectbox("NumberOfMajorSurgeries", [0,1,2,3])
+    known_allergies  = st.selectbox("KnownAllergies", [0,1])
+    history_of_cancer = st.selectbox("HistoryOfCancerInFamily", [0,1])
+    number_of_surgeries  = st.selectbox("NumberOfMajorSurgeries", [0,1,2,3])
 
 # Calculate BMI and derived categories
 bmi = calculate_bmi(height, weight)
+
+
+primaryColor="#F39C12"
+backgroundColor="#FFFFFF"
+secondaryBackgroundColor="#F0F2F6"
+textColor="#333333"
 
 
 # BMI Categories
@@ -69,6 +81,7 @@ input_date = np.array([[age, diabetes, blood_pressure_problems, any_transplants,
 if st.button("Predict Insurance Premium"):
     prediction = model.predict(input_date)
     prediction2 = model2.predict(input_date)
-    st.write(f"Random Forest Regressor Predicted Premium Price: ${prediction[0]:.2f}")
-    st.write(f"Gradient Boosting Regressor Model Predicted Premium Price: ${prediction2[0]:.2f}")
+    st.write(f"Predicted Premium Price: ${((prediction[0] + prediction2[0]) / 2):.2f}")
+
+ 
     
