@@ -32,20 +32,30 @@ with st.sidebar:
     st.caption("Age should be between 17 and 70.")
     age_cat = pd.cut([age], bins=age_bins, labels=age_labels, right=False)[0]
     age_category = age_mapping[age_cat]
-    height = st.slider("height", 150,200,170)
+    height = st.slider("height", 150,200,170, help="Enter your height in cm")
     st.caption("height should be between 150 and 200.")
-    weight = st.slider("weight", 50,140,70)
+    weight = st.slider("weight", 50,140,70,help="Enter your weight in kg")
     st.caption("weight should be between 50 and 140.")
 
 with st.expander("Medical History"):
-    diabetes = st.selectbox("Diabetes", [0,1])
-    blood_pressure_problems = st.selectbox("BloodPressureProblems", [0,1])
-    any_transplants = st.selectbox("AnyTransplants",[0,1])
-    any_chronic_diseases = st.selectbox("AnyChronicDiseases", [0,1])
+    options = {"No":0, "Yes":1}
 
-    known_allergies  = st.selectbox("KnownAllergies", [0,1])
-    history_of_cancer = st.selectbox("HistoryOfCancerInFamily", [0,1])
+    diabetes = st.selectbox("Diabetes", options.keys())
+    blood_pressure_problems = st.selectbox("BloodPressureProblems", options.keys())
+    any_transplants = st.selectbox("AnyTransplants",options.keys())
+    any_chronic_diseases = st.selectbox("AnyChronicDiseases", options.keys())
+
+    known_allergies  = st.selectbox("KnownAllergies", options.keys())
+    history_of_cancer = st.selectbox("HistoryOfCancerInFamily", options.keys())
     number_of_surgeries  = st.selectbox("NumberOfMajorSurgeries", [0,1,2,3])
+
+    # Convert Yes/No to 0/1
+    diabetes = options[diabetes]
+    blood_pressure_problems = options[blood_pressure_problems]
+    any_transplants = options[any_transplants]
+    any_chronic_diseases = options[any_chronic_diseases]
+    known_allergies = options[known_allergies]
+    history_of_cancer = options[history_of_cancer]
 
 # Calculate BMI and derived categories
 bmi = calculate_bmi(height, weight)

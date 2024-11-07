@@ -1,5 +1,5 @@
-streamlit 
+streamlit
 scikit-learn
 numpy
 pandas
-pickle
+setuptools
