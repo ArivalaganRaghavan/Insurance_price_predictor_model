@@ -9,14 +9,8 @@ with open("insurance_premium_model_rfr.pkl", "rb") as f:
 
 ###with open("insurance_premium_model_lgbmr.pkl", "rb") as f1:
     ### model1 = pickle.load(f1)
-
-try:
-    with open('insurance_premium_model_gbr.pkl', 'rb') as f2:
-        model2 = pickle.load(f2)
-except FileNotFoundError:
-    print("The file was not found.")
-except pickle.UnpicklingError:
-    print("The file is not a valid pickle file.")
+with open("insurance_premium_model_gbr.pkl", "rb") as f2:
+    model2 = pickle.load(f2)
 
 # define BMI caclulation
 def calculate_bmi(height, weight):
