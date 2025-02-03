@@ -7,8 +7,8 @@ import pandas as pd
 with open("insurance_premium_model_rfr.pkl", "rb") as f:
     model = pickle.load(f)
 
-###with open("insurance_premium_model_lgbmr.pkl", "rb") as f1:
-    ### model1 = pickle.load(f1)
+with open("insurance_premium_model_lgbmr.pkl", "rb") as f1:
+    model1 = pickle.load(f1)
 with open("insurance_premium_model_gbr.pkl", "rb") as f2:
     model2 = pickle.load(f2)
 
@@ -89,8 +89,9 @@ input_date = np.array([[age, diabetes, blood_pressure_problems, any_transplants,
 
 if st.button("Predict Insurance Premium"):
     prediction = model.predict(input_date)
+    prediction1 = model1.predict(input_date)
     prediction2 = model2.predict(input_date)
-    st.write(f"Predicted Premium Price: ${((prediction[0] + prediction2[0]) / 2):.2f}")
+    st.write(f"Predicted Premium Price: ${((prediction[0] + prediction2[0]+prediction1[0]) / 2):.2f}")
 
  
     
