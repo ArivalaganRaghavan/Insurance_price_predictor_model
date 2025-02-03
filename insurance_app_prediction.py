@@ -91,7 +91,7 @@ if st.button("Predict Insurance Premium"):
     prediction = model.predict(input_date)
     prediction1 = model1.predict(input_date)
     prediction2 = model2.predict(input_date)
-    st.write(f"Predicted Premium Price: ${((prediction[0] + prediction2[0]+prediction1[0]) / 2):.2f}")
+    st.write(f"Predicted Premium Price: ${((prediction[0] + prediction2[0]+prediction1[0]) / 3):.2f}")
 
  
     
