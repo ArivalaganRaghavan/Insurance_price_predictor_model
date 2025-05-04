@@ -39,6 +39,11 @@ Insurance cost prediction is a complex yet rewarding task that requires a robust
 
 This analysis underscores the importance of features like age, chronic conditions, and organ transplants in driving premium costs. Predictive models that incorporate such factors can enable insurance providers to offer competitive, risk-adjusted pricing while ensuring fair access to coverage across diverse populations.
 
+## App Link
+
+Click the below link to play with ML model
+https://insurancepricepredictormodel-nbxnkjq6i5xm4mcqdshiyn.streamlit.app/
+
 
 
 
