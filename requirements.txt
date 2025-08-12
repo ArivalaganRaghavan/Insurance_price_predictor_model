@@ -4,3 +4,8 @@ numpy
 pandas
 setuptools
 lightgbm
+xgboost
+matplotlib
+seaborn
+scipy
+statsmodels

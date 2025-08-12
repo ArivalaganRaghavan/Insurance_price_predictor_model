@@ -44,6 +44,34 @@ This analysis underscores the importance of features like age, chronic condition
 Click the below link to play with ML model
 https://insurancepricepredictormodel-nbxnkjq6i5xm4mcqdshiyn.streamlit.app/
 
+## 📝 **Important Notes**
+
+### Notebook Improvements
+This repository has been optimized with the following corrections:
+- **Fixed Imports**: Corrected import statements for regression problem (removed classification-specific imports)
+- **Enhanced Data Loading**: Added universal data loading instructions for both Google Colab and local environments
+- **Improved Documentation**: Fixed spelling errors and enhanced code readability
+- **Application Enhancements**: Fixed age range inconsistencies and improved user interface
+
+### Requirements
+The complete list of dependencies is available in `requirements.txt`:
+- streamlit
+- scikit-learn==1.5.2
+- numpy
+- pandas
+- lightgbm
+- xgboost
+- matplotlib
+- seaborn
+- scipy
+- statsmodels
+
+### Running the Application
+```bash
+pip install -r requirements.txt
+streamlit run insurance_app_prediction.py
+```
+
 
 
 
